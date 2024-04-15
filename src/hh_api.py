@@ -1,5 +1,16 @@
-from abstract_API import AbstractApi
+from abc import ABC, abstractmethod
 import requests
+
+
+class AbstractApi(ABC):
+    '''Абстрактный класс для создания классов поиска вакинсий с различных сайтов'''
+    @abstractmethod
+    def __init__(self):
+         pass
+
+    @abstractmethod
+    def load_vacancies(self, keyword):
+         pass
 
 
 class HHApi(AbstractApi):
@@ -20,4 +31,4 @@ class HHApi(AbstractApi):
             vacancies = response.json()['items']
             self.vacancies.extend(vacancies)
             self.params['page'] += 1
-        return self.vacancies
+
