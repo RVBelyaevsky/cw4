@@ -24,11 +24,12 @@ class HHApi(AbstractApi):
 
     def load_vacancies(self, keyword):
         '''Функция возвращает список вакансий по ключевому слову пользователя'''
-
         self.params['text'] = keyword
-        while self.params.get('page') != 20:
+        while self.params.get('page') != 2:
             response = requests.get(self.url, headers=self.headers, params=self.params)
             vacancies = response.json()['items']
             self.vacancies.extend(vacancies)
             self.params['page'] += 1
+        return self.vacancies
+
 
